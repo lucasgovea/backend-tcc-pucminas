@@ -13,6 +13,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Where;
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -20,6 +21,7 @@ import lombok.Data;
 
 @Entity
 @Data
+@Where(clause = "deletado = false")
 public class Paciente {
 	
 	@Id
@@ -36,8 +38,6 @@ public class Paciente {
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private LocalDate dataNascimento;
 	
-	@Embedded
-	private Endereco endereco;
 	
 	@Embedded
 	@NotNull(message = "Telefone é obrigatorio")
@@ -48,7 +48,9 @@ public class Paciente {
 	@NotEmpty(message = "Email é obrigatorio")
 	private String email;
 	
+	private boolean deletado;
 	
-	
+	@Embedded
+	private Endereco endereco;
 }
 

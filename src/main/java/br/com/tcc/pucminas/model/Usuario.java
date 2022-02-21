@@ -12,14 +12,21 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Setter
 @Getter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Usuario {
 	
 	@Id
@@ -28,6 +35,7 @@ public class Usuario {
 	
 	private String login;
 	
+	@Getter(onMethod = @__( @JsonIgnore ))
 	private String senha;
 	
 	@JsonIgnoreProperties("usuarios")

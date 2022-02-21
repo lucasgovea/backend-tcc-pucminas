@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import br.com.tcc.pucminas.resources.exception.StandardError;
 import br.com.tcc.pucminas.resources.exception.ValidationError;
 import br.com.tcc.pucminas.service.exception.EntityNotFoundException;
+import br.com.tcc.pucminas.service.exception.HorarioIndisponivelException;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
@@ -64,5 +65,18 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
 		
     }
+	
+	@ExceptionHandler(HorarioIndisponivelException.class)
+	public ResponseEntity<StandardError> handleHorarioIndisponivelException(HorarioIndisponivelException e, HttpServletRequest request) {
+		
+		StandardError error = new StandardError();
+		error.setTimestamp(ZonedDateTime.now());
+		error.setStatus(HttpStatus.CONFLICT.value());
+		error.setMessage(e.getMessage());
+		error.setError("Horario Indisponivel");
+		error.setPath(request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+		
+	}
 	
 }
