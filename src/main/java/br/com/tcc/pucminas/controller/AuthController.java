@@ -21,7 +21,7 @@ import br.com.tcc.pucminas.security.jwt.JwtUtils;
 
 
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {

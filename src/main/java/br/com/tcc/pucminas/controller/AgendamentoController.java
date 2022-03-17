@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.tcc.pucminas.confirmaatendimento.email.ConfirmaAtendimento;
 import br.com.tcc.pucminas.dto.AgendamentoDTO;
 import br.com.tcc.pucminas.model.Agendamento;
 import br.com.tcc.pucminas.service.AgendamentoService;
@@ -22,6 +23,9 @@ public class AgendamentoController {
 	
 	@Autowired
 	AgendamentoService agendamentoService;
+	
+	@Autowired
+	ConfirmaAtendimento confirmaAtendimento;
 	
 	@GetMapping
 	@PreAuthorize("hasAnyAuthority('admin')")
@@ -35,6 +39,13 @@ public class AgendamentoController {
 	public ResponseEntity<Agendamento> agendar(@RequestBody AgendamentoDTO dto) {
 		Agendamento agendamento = agendamentoService.agendar(dto.getIdPaciente(), dto.getIdProfissional(), dto.getMarcacao());
 		return ResponseEntity.status(HttpStatus.OK).body(agendamento);
+	}
+	
+	@PostMapping("/confirmar")
+	@PreAuthorize("hasAnyAuthority('admin')")
+	public ResponseEntity<Agendamento> enviarConfirmacao() {
+		confirmaAtendimento.receberMensagem(0);
+		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 	
 	
