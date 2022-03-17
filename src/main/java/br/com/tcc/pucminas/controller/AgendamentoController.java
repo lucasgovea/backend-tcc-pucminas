@@ -41,12 +41,12 @@ public class AgendamentoController {
 		return ResponseEntity.status(HttpStatus.OK).body(agendamento);
 	}
 	
-	@PostMapping("/confirmar")
-	@PreAuthorize("hasAnyAuthority('admin')")
-	public ResponseEntity<Agendamento> enviarConfirmacao() {
-		confirmaAtendimento.receberMensagem(0);
-		return ResponseEntity.status(HttpStatus.OK).build();
-	}
+//	@PostMapping("/confirmar")
+//	@PreAuthorize("hasAnyAuthority('admin')")
+//	public ResponseEntity<Agendamento> enviarConfirmacao() {
+//		confirmaAtendimento.receberMensagem(0);
+//		return ResponseEntity.status(HttpStatus.OK).build();
+//	}
 	
 	
 }
