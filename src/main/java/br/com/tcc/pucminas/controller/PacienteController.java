@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.tcc.pucminas.dto.PacienteFilterDTO;
 import br.com.tcc.pucminas.model.Paciente;
 import br.com.tcc.pucminas.service.PacienteService;
 
@@ -29,18 +30,25 @@ public class PacienteController {
 	@Autowired
 	PacienteService pacienteService;
 	
-	@GetMapping
-	@PreAuthorize("hasAnyAuthority('admin')")
-	public ResponseEntity<List<Paciente>> listarPacientes() {
-		List<Paciente> pacientes = pacienteService.buscarTodos();
-		return ResponseEntity.status(HttpStatus.OK).body(pacientes);
-	}
+//	@GetMapping
+//	@PreAuthorize("hasAnyAuthority('admin')")
+//	public ResponseEntity<List<Paciente>> listarPacientes() {
+//		List<Paciente> pacientes = pacienteService.buscarTodos();
+//		return ResponseEntity.status(HttpStatus.OK).body(pacientes);
+//	}
 	
 	@GetMapping("/{idPaciente}")
 	@PreAuthorize("hasAnyAuthority('admin')")
 	public ResponseEntity<Paciente> listarPacientes(@PathVariable Long idPaciente) {
 		Paciente paciente = pacienteService.buscarPorId(idPaciente);
 		return ResponseEntity.status(HttpStatus.OK).body(paciente);
+	}
+	
+	@GetMapping
+	@PreAuthorize("hasAnyAuthority('admin')")
+	public ResponseEntity<List<Paciente>> buscarPaciente(@RequestBody(required =false) PacienteFilterDTO dadosBusca) {
+		List<Paciente> pacientes = pacienteService.buscarFiltranto(dadosBusca);
+		return ResponseEntity.status(HttpStatus.OK).body(pacientes);
 	}
 	
 	@PostMapping

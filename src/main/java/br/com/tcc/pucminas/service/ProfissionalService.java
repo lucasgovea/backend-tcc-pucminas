@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.tcc.pucminas.dto.ProfissionalDTO;
+import br.com.tcc.pucminas.dto.ProfissionalFilterDTO;
 import br.com.tcc.pucminas.model.Perfil;
 import br.com.tcc.pucminas.model.PerfilEnum;
 import br.com.tcc.pucminas.model.Profissional;
@@ -19,6 +20,7 @@ import br.com.tcc.pucminas.model.Usuario;
 import br.com.tcc.pucminas.repository.PerfilRepository;
 import br.com.tcc.pucminas.repository.ProfissionalRepository;
 import br.com.tcc.pucminas.service.exception.EntityNotFoundException;
+import br.com.tcc.pucminas.specification.ProfissionalSpecification;
 
 @Service
 public class ProfissionalService {
@@ -77,6 +79,11 @@ public class ProfissionalService {
 		profissional.setId(p.getId());
 		return profissionalRepo.save(profissional);
 	}
+
+	public List<Profissional> buscarFiltranto(ProfissionalFilterDTO dadosBusca) {
+		return profissionalRepo.findAll(new ProfissionalSpecification(dadosBusca));
+	}
+	
 	
 	
 }

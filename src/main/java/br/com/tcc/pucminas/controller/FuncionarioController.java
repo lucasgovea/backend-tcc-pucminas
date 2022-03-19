@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.tcc.pucminas.dto.FuncionarioFilterDTO;
 import br.com.tcc.pucminas.model.Funcionario;
 import br.com.tcc.pucminas.service.FuncionarioService;
 
@@ -31,8 +32,8 @@ public class FuncionarioController {
 	
 	@GetMapping
 	@PreAuthorize("hasAnyAuthority('admin')")
-	public ResponseEntity<List<Funcionario>> listarFuncionarios() {
-		List<Funcionario> funcionarios = funcionarioService.buscarTodos();
+	public ResponseEntity<List<Funcionario>> listarFuncionarios(@RequestBody(required=false) FuncionarioFilterDTO dadosBusca) {
+		List<Funcionario> funcionarios = funcionarioService.buscarFiltranto(dadosBusca);
 		return ResponseEntity.status(HttpStatus.OK).body(funcionarios);
 	}
 	

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.tcc.pucminas.confirmaatendimento.email.ConfirmaAtendimento;
 import br.com.tcc.pucminas.dto.AgendamentoDTO;
 import br.com.tcc.pucminas.model.Agendamento;
 import br.com.tcc.pucminas.service.AgendamentoService;
@@ -24,8 +23,8 @@ public class AgendamentoController {
 	@Autowired
 	AgendamentoService agendamentoService;
 	
-	@Autowired
-	ConfirmaAtendimento confirmaAtendimento;
+//	@Autowired
+//	ConfirmaAtendimento confirmaAtendimento;
 	
 	@GetMapping
 	@PreAuthorize("hasAnyAuthority('admin')")

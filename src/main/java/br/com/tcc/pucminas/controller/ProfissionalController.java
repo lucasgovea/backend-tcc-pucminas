@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.tcc.pucminas.dto.ProfissionalDTO;
+import br.com.tcc.pucminas.dto.ProfissionalFilterDTO;
 import br.com.tcc.pucminas.model.Profissional;
 import br.com.tcc.pucminas.service.ProfissionalService;
 
@@ -32,14 +33,14 @@ public class ProfissionalController {
 	
 	@GetMapping
 	@PreAuthorize("hasAnyAuthority('admin')")
-	public ResponseEntity<List<Profissional>> listarProfissionais() {
-		List<Profissional> profissionais = profissionalService.buscarTodos();
+	public ResponseEntity<List<Profissional>> buscarProfissionais(@RequestBody(required=false) ProfissionalFilterDTO dadosBusca) {
+		List<Profissional> profissionais = profissionalService.buscarFiltranto(dadosBusca);
 		return ResponseEntity.status(HttpStatus.OK).body(profissionais);
 	}
 	
 	@GetMapping("/{idFuncionario}")
 	@PreAuthorize("hasAnyAuthority('admin')")
-	public ResponseEntity<Profissional> buscarFuncionario(@PathVariable Long idProfissional) {
+	public ResponseEntity<Profissional> buscarProfissional(@PathVariable Long idProfissional) {
 		Profissional profissional = profissionalService.buscarPorId(idProfissional);
 		return ResponseEntity.status(HttpStatus.OK).body(profissional);
 	}
