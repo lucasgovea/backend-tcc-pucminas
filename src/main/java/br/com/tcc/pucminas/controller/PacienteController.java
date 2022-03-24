@@ -30,13 +30,6 @@ public class PacienteController {
 	@Autowired
 	PacienteService pacienteService;
 	
-//	@GetMapping
-//	@PreAuthorize("hasAnyAuthority('admin')")
-//	public ResponseEntity<List<Paciente>> listarPacientes() {
-//		List<Paciente> pacientes = pacienteService.buscarTodos();
-//		return ResponseEntity.status(HttpStatus.OK).body(pacientes);
-//	}
-	
 	@GetMapping("/{idPaciente}")
 	@PreAuthorize("hasAnyAuthority('admin')")
 	public ResponseEntity<Paciente> listarPacientes(@PathVariable Long idPaciente) {
@@ -47,7 +40,7 @@ public class PacienteController {
 	@GetMapping
 	@PreAuthorize("hasAnyAuthority('admin')")
 	public ResponseEntity<List<Paciente>> buscarPaciente(@RequestBody(required =false) PacienteFilterDTO dadosBusca) {
-		List<Paciente> pacientes = pacienteService.buscarFiltranto(dadosBusca);
+		List<Paciente> pacientes = pacienteService.buscarFiltrando(dadosBusca);
 		return ResponseEntity.status(HttpStatus.OK).body(pacientes);
 	}
 	

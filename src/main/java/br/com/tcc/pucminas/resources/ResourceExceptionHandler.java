@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import br.com.tcc.pucminas.resources.exception.StandardError;
 import br.com.tcc.pucminas.resources.exception.ValidationError;
+import br.com.tcc.pucminas.service.exception.ConfirmacaoEmailException;
 import br.com.tcc.pucminas.service.exception.EntityNotFoundException;
 import br.com.tcc.pucminas.service.exception.HorarioIndisponivelException;
 
@@ -76,6 +77,19 @@ public class ResourceExceptionHandler {
 		error.setError("Horario Indisponivel");
 		error.setPath(request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+		
+	}
+	
+	@ExceptionHandler(ConfirmacaoEmailException.class)
+	public ResponseEntity<StandardError> handleConfirmacaoEmailException(ConfirmacaoEmailException e, HttpServletRequest request) {
+		
+		StandardError error = new StandardError();
+		error.setTimestamp(ZonedDateTime.now());
+		error.setStatus(HttpStatus.NOT_FOUND.value());
+		error.setMessage(e.getMessage());
+		error.setError("Falha ao enviar email");
+		error.setPath(request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
 		
 	}
 	

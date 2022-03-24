@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Spring boot eamil teplate with Thymeleaf</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link href='http://fonts.googleapis.com/css?family=Roboto'
+	rel='stylesheet' type='text/css' />
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+<!-- use the font -->
+<style>
+	body {
+		font-family: 'Roboto', sans-serif;
+		font-size: 48px;
+	}
+</style>
+</head>
+<body>
+	<a href="https://urldosite.com"> 
+		<img src="http://urldosite.com/logo.png" height="110" width="500" />
+	</a>
+
+	<p th:text="${'Prezado(a) paciente ' + nomePaciente}"></p>
+
+	<p>
+		Você tem uma consulta marcada conosco para o Dr(a).
+		<b th:text="${nomeProfissional}"></b> às 
+	</p>
+	<span>
+		<b th:text="${datahoraAgendamento}"></b>
+	</span>
+
+	<p>
+		Podemos confirmar sua consulta? 
+		<a th:href="'http://localhost:8080/api/agendamentos/confirmar?id='+${idAgendamento}+'&confirm=1'" class="btn btn-success">Confirmar</a>
+		<a th:href="'http://localhost:8080/api/agendamentos/confirmar?id='+${idAgendamento}+'&confirm=0'" class="btn btn-danger">Desmarcar</a>
+	</p>
+	<p>Atenciosamente,</p>
+	<br />
+	<p th:text="${nomeEstabelecimento}"></p>
+</body>
+</html>

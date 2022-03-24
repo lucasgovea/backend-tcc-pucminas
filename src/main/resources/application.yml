@@ -1,0 +1,47 @@
+spring:
+  jpa:
+    generate-ddl: 'true'
+    hibernate:
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        format_sql: 'true'
+    defer-datasource-initialization: 'true'
+    show-sql: 'true'
+  mail:
+    username: youremail
+    port: '587'
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: 'true'
+          auth: 'true'
+    default-encoding: UTF-8
+    host: smtp.gmail.com
+    protocol: smtp
+    test-connection: 'false'
+    password: yourpassword
+  datasource:
+    driverClassName: org.postgresql.Driver
+    password: 9b3881d0c947192c558b864cd37cb74ad4d15494df9afe8441764d1ee5c26629
+    username: xljxwnwnhyjgda
+    url: jdbc:postgresql://ec2-3-228-222-169.compute-1.amazonaws.com:5432/d473ed0tg0u9us
+#  h2:
+#    console:
+#      settings:
+#        trace: 'false'
+#        web-allow-others: 'false'
+#      path: /h2-console
+#      enabled: 'true'
+  jackson:
+    serialization:
+      write-dates-as-timestamps: 'false'
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+hikari:
+  max-lifetime: '50000'

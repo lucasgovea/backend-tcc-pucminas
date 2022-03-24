@@ -3,6 +3,7 @@ package br.com.tcc.pucminas.service;
 import java.util.List;
 
 import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class PacienteService {
 				.orElseThrow(() -> new EntityNotFoundException("Entidade nao encontrada pelo id " + id));
 	}
 	
-	public List<Paciente> buscarFiltranto(PacienteFilterDTO dadosBusca) {
+	public List<Paciente> buscarFiltrando(PacienteFilterDTO dadosBusca) {
 		return pacienteRepo.findAll(new PacienteSpecification(dadosBusca));
 	}
 
