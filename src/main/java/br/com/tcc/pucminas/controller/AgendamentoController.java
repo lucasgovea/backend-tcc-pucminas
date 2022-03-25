@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.tcc.pucminas.dto.AgendamentoDTO;
+import br.com.tcc.pucminas.dto.AgendamentoFilterDTO;
 import br.com.tcc.pucminas.model.Agendamento;
 import br.com.tcc.pucminas.service.AgendamentoService;
 
@@ -29,8 +30,15 @@ public class AgendamentoController {
 	
 	@GetMapping
 	@PreAuthorize("hasAnyAuthority('admin')")
-	public ResponseEntity<List<Agendamento>> listarAgendamentos() {
-		List<Agendamento> agendamentos = agendamentoService.buscarTodos();
+	public ResponseEntity<List<Agendamento>> listarAgendamentos(@RequestBody(required =false) AgendamentoFilterDTO dadosBusca) {
+		List<Agendamento> agendamentos = agendamentoService.buscarFiltrando(dadosBusca);
+		return ResponseEntity.status(HttpStatus.OK).body(agendamentos);
+	}
+	
+	@GetMapping("/proximos/{idPaciente}")
+	@PreAuthorize("hasAnyAuthority('admin')")
+	public ResponseEntity<List<Agendamento>> listarProximosAgendamentosPaciente(@PathVariable Long idPaciente) {
+		List<Agendamento> agendamentos = agendamentoService.buscarProximosPorIdPaciente(idPaciente);
 		return ResponseEntity.status(HttpStatus.OK).body(agendamentos);
 	}
 	

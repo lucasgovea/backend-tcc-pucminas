@@ -12,12 +12,14 @@ import javax.transaction.Transactional;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import br.com.tcc.pucminas.dto.AgendamentoFilterDTO;
 import br.com.tcc.pucminas.model.Agendamento;
 import br.com.tcc.pucminas.model.DadosEmailConfirmacao;
 import br.com.tcc.pucminas.producer.ConfirmaAgendamentoProducer;
 import br.com.tcc.pucminas.repository.AgendamentoRepository;
 import br.com.tcc.pucminas.service.exception.ConfirmacaoEmailException;
 import br.com.tcc.pucminas.service.exception.HorarioIndisponivelException;
+import br.com.tcc.pucminas.specification.AgendamentoSpecification;
 
 @Service
 public class AgendamentoService {
@@ -36,13 +38,17 @@ public class AgendamentoService {
 		this.profissionalService = profissionalService;
 		this.confirmaAgendamentoProducer = confirmaAgendamentoProducer;
 	}
-
-	public List<Agendamento> buscarTodos() {
-		return agendamentoRepo.findAll();
-	}
 	
 	public Agendamento buscarPorId(Long id) {
 		return agendamentoRepo.findById(id).orElse(null);
+	}
+	
+	public List<Agendamento> buscarProximosPorIdPaciente(Long idPaciente) {
+		return agendamentoRepo.buscarProximosAgendamentoDoPaciente(idPaciente);
+	}
+	
+	public List<Agendamento> buscarFiltrando(AgendamentoFilterDTO dadosBusca) {
+		return agendamentoRepo.findAll(new AgendamentoSpecification(dadosBusca));
 	}
 	
 	public Agendamento agendar(Long idPaciente, Long idProfissional, LocalDateTime horario) {

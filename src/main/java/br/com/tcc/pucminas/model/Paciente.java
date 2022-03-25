@@ -17,6 +17,8 @@ import org.hibernate.annotations.Where;
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Entity
@@ -48,6 +50,7 @@ public class Paciente {
 	@NotEmpty(message = "Email é obrigatorio")
 	private String email;
 	
+	@JsonIgnore
 	private boolean deletado;
 	
 	@Embedded

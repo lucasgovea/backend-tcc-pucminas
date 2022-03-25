@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.tcc.pucminas.dto.PacienteFilterDTO;
+import br.com.tcc.pucminas.model.Agendamento;
 import br.com.tcc.pucminas.model.Paciente;
+import br.com.tcc.pucminas.repository.AgendamentoRepository;
 import br.com.tcc.pucminas.repository.PacienteRepository;
 import br.com.tcc.pucminas.service.exception.EntityNotFoundException;
+import br.com.tcc.pucminas.specification.AgendamentoSpecification;
 import br.com.tcc.pucminas.specification.PacienteSpecification;
 
 @Service
@@ -27,7 +30,7 @@ public class PacienteService {
 	public List<Paciente> buscarFiltrando(PacienteFilterDTO dadosBusca) {
 		return pacienteRepo.findAll(new PacienteSpecification(dadosBusca));
 	}
-
+	
 	public Paciente inserir(Paciente paciente) {
 		return pacienteRepo.save(paciente);
 	}
@@ -37,7 +40,6 @@ public class PacienteService {
 		Paciente p = pacienteRepo.findById(idPaciente)
 				.orElseThrow(() -> new EntityNotFoundException("Entidade nao encontrada pelo id " + idPaciente));
 		p.setDeletado(true);
-		pacienteRepo.save(p);
 	}
 
 	@Transactional
