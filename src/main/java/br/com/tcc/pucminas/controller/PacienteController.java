@@ -39,7 +39,7 @@ public class PacienteController {
 	
 	@GetMapping
 	@PreAuthorize("hasAnyAuthority('admin')")
-	public ResponseEntity<List<Paciente>> buscarPaciente(@RequestBody(required =false) PacienteFilterDTO dadosBusca) {
+	public ResponseEntity<List<Paciente>> buscarPaciente(PacienteFilterDTO dadosBusca) {
 		List<Paciente> pacientes = pacienteService.buscarFiltrando(dadosBusca);
 		return ResponseEntity.status(HttpStatus.OK).body(pacientes);
 	}

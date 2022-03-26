@@ -22,10 +22,7 @@ import br.com.tcc.pucminas.service.UsuarioSecurityService;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(
-		// securedEnabled = true,
-		// jsr250Enabled = true,
-		prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
@@ -57,7 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.cors().and().csrf().disable()
 		.exceptionHandling().authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)).and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-			.authorizeRequests().antMatchers("/api/auth/**", "/api/agendamentos/confirmar/**").permitAll()
+			.authorizeRequests().antMatchers("/api/auth/**", "/api/agendamentos/confirmar/**", "/swagger-ui.html", "/swagger-ui/**", "/swagger-resources/**", "/v2/api-docs").permitAll()
 			.antMatchers("/api/test/**", "/h2-console/**").permitAll()
 			.anyRequest().authenticated();
 		

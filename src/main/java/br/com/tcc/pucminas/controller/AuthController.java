@@ -1,6 +1,5 @@
 package br.com.tcc.pucminas.controller;
 
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.tcc.pucminas.dto.AuthResponse;
+import br.com.tcc.pucminas.dto.LoginDTO;
 import br.com.tcc.pucminas.security.jwt.JwtUtils;
 
 
@@ -33,10 +33,10 @@ public class AuthController {
 	JwtUtils jwtUtils;
 
 	@PostMapping("/signin")
-	public ResponseEntity<AuthResponse> authenticateUser(@RequestBody Map<String, Object> payload) {
+	public ResponseEntity<AuthResponse> authenticateUser(@RequestBody LoginDTO dadosLogin) {
 
 		Authentication authentication = authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(payload.get("username"), payload.get("password")));
+				new UsernamePasswordAuthenticationToken(dadosLogin.getUsername(), dadosLogin.getPassword()));
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtUtils.generateJwtToken(authentication);

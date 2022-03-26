@@ -33,12 +33,12 @@ public class ProfissionalController {
 	
 	@GetMapping
 	@PreAuthorize("hasAnyAuthority('admin')")
-	public ResponseEntity<List<Profissional>> buscarProfissionais(@RequestBody(required=false) ProfissionalFilterDTO dadosBusca) {
+	public ResponseEntity<List<Profissional>> buscarProfissionais(ProfissionalFilterDTO dadosBusca) {
 		List<Profissional> profissionais = profissionalService.buscarFiltranto(dadosBusca);
 		return ResponseEntity.status(HttpStatus.OK).body(profissionais);
 	}
 	
-	@GetMapping("/{idFuncionario}")
+	@GetMapping("/{idProfissional}")
 	@PreAuthorize("hasAnyAuthority('admin')")
 	public ResponseEntity<Profissional> buscarProfissional(@PathVariable Long idProfissional) {
 		Profissional profissional = profissionalService.buscarPorId(idProfissional);

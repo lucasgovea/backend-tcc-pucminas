@@ -32,7 +32,7 @@ public class FuncionarioController {
 	
 	@GetMapping
 	@PreAuthorize("hasAnyAuthority('admin')")
-	public ResponseEntity<List<Funcionario>> listarFuncionarios(@RequestBody(required=false) FuncionarioFilterDTO dadosBusca) {
+	public ResponseEntity<List<Funcionario>> listarFuncionarios(FuncionarioFilterDTO dadosBusca) {
 		List<Funcionario> funcionarios = funcionarioService.buscarFiltranto(dadosBusca);
 		return ResponseEntity.status(HttpStatus.OK).body(funcionarios);
 	}

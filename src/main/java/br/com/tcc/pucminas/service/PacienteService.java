@@ -8,12 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.tcc.pucminas.dto.PacienteFilterDTO;
-import br.com.tcc.pucminas.model.Agendamento;
 import br.com.tcc.pucminas.model.Paciente;
-import br.com.tcc.pucminas.repository.AgendamentoRepository;
 import br.com.tcc.pucminas.repository.PacienteRepository;
 import br.com.tcc.pucminas.service.exception.EntityNotFoundException;
-import br.com.tcc.pucminas.specification.AgendamentoSpecification;
 import br.com.tcc.pucminas.specification.PacienteSpecification;
 
 @Service
