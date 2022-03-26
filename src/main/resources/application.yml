@@ -28,9 +28,9 @@ spring:
     password: yourpassword
   datasource:
     driverClassName: org.postgresql.Driver
-    password: 9b3881d0c947192c558b864cd37cb74ad4d15494df9afe8441764d1ee5c26629
-    username: xljxwnwnhyjgda
-    url: jdbc:postgresql://ec2-3-228-222-169.compute-1.amazonaws.com:5432/d473ed0tg0u9us
+    password: tcc-postgres
+    username: tcc-postgres
+    url: jdbc:postgresql://db:5432/tcc-postgres
   jackson:
     serialization:
       write-dates-as-timestamps: 'false'
