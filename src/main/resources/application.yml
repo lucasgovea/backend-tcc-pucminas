@@ -30,12 +30,12 @@ spring:
     driverClassName: org.postgresql.Driver
     password: tcc-postgres
     username: tcc-postgres
-    url: jdbc:postgresql://db:5432/tcc-postgres
+    url: jdbc:postgresql://localhost:5432/tcc-postgres
   jackson:
     serialization:
       write-dates-as-timestamps: 'false'
   rabbitmq:
-    host: localhost
+    host: rabbitmq
     port: 5672
     username: guest
     password: guest

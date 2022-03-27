@@ -30,7 +30,7 @@ public class AgendamentoController {
 	
 	@GetMapping
 	@PreAuthorize("hasAnyAuthority('admin')")
-	public ResponseEntity<List<Agendamento>> listarAgendamentos(@RequestBody(required =false) AgendamentoFilterDTO dadosBusca) {
+	public ResponseEntity<List<Agendamento>> listarAgendamentos(AgendamentoFilterDTO dadosBusca) {
 		List<Agendamento> agendamentos = agendamentoService.buscarFiltrando(dadosBusca);
 		return ResponseEntity.status(HttpStatus.OK).body(agendamentos);
 	}
