@@ -3,15 +3,20 @@ spring:
       pathmatch:
             matching-strategy: ANT_PATH_MATCHER
   jpa:
-    generate-ddl: 'true'
+    generate-ddl: 'false'
     hibernate:
       ddl-auto: none
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     properties:
       hibernate:
         format_sql: 'true'
-    defer-datasource-initialization: 'true'
+#    defer-datasource-initialization: 'true'
     show-sql: 'true'
+  flyway:
+    baseline-on-migrate: 'false'
+    password: tcc-postgres
+    user: tcc-postgres
+    url: jdbc:postgresql://db:5432/tcc-postgres
   mail:
     username: youremail
     port: '587'
@@ -30,7 +35,7 @@ spring:
     driverClassName: org.postgresql.Driver
     password: tcc-postgres
     username: tcc-postgres
-    url: jdbc:postgresql://localhost:5432/tcc-postgres
+    url: jdbc:postgresql://db:5432/tcc-postgres
   jackson:
     serialization:
       write-dates-as-timestamps: 'false'
