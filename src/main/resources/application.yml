@@ -39,5 +39,6 @@ spring:
     port: 5672
     username: guest
     password: guest
+# remover sql.init.mode=always quando nao quiser que execute o data.sql#  sql:#    init:#      mode: always
 hikari:
   max-lifetime: '50000'
