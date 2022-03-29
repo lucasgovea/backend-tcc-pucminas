@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 import org.springframework.scheduling.annotation.Scheduled;
@@ -71,11 +72,13 @@ public class AgendamentoService {
 	}
 	
 	@Transactional
-	public void confirmarAgendamento(Long idAgendamento, boolean isConfirmado) {
+	public Agendamento confirmarAgendamento(Long idAgendamento, boolean isConfirmado) {
 		Optional<Agendamento> agendamentoOpt = agendamentoRepo.findById(idAgendamento);
 		if(agendamentoOpt.isPresent()) {
 			agendamentoOpt.get().setConfirmado(isConfirmado);
+			return agendamentoOpt.get();
 		}
+		throw new EntityNotFoundException("Agendamento nao encontrato");
 	}
 	
 	@Scheduled(cron = "0 0 8 * * *", zone = TIME_ZONE) //todo dia as 8h

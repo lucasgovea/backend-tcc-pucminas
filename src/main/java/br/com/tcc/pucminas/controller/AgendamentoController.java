@@ -49,13 +49,27 @@ public class AgendamentoController {
 		return ResponseEntity.status(HttpStatus.OK).body(agendamento);
 	}
 	
-	@GetMapping("/confirmar")
+	@GetMapping("/confirmacao")
 	public ResponseEntity<String> confirmarConsulta(@RequestParam("id") Long idAgendamento, @RequestParam("confirm") boolean isConfirmado) {
 		agendamentoService.confirmarAgendamento(idAgendamento, isConfirmado);
 		if(isConfirmado) {
 			return ResponseEntity.status(HttpStatus.OK).body("Consulta confirmada com sucesso");
 		}
 		return ResponseEntity.status(HttpStatus.OK).body("A consulta foi cancelada");
+	}
+	
+	@PostMapping("/confirmacao")
+	@PreAuthorize("hasAnyAuthority('admin')")
+	public ResponseEntity<Agendamento> confirmarConsulta(@RequestParam("id") Long idAgendamento) {
+		Agendamento agendamento = agendamentoService.confirmarAgendamento(idAgendamento, true);
+		return ResponseEntity.status(HttpStatus.OK).body(agendamento);
+	}
+	
+	@PostMapping("/cancelamento")
+	@PreAuthorize("hasAnyAuthority('admin')")
+	public ResponseEntity<Agendamento> cancelarConsulta(@RequestParam("id") Long idAgendamento) {
+		Agendamento agendamento = agendamentoService.confirmarAgendamento(idAgendamento, false);
+		return ResponseEntity.status(HttpStatus.OK).body(agendamento);
 	}
 	
 	@PostMapping("enviar-email-confirmacao/{idAgendamento}")
