@@ -58,16 +58,16 @@ public class AgendamentoController {
 		return ResponseEntity.status(HttpStatus.OK).body("A consulta foi cancelada");
 	}
 	
-	@PostMapping("/confirmacao")
+	@PostMapping("/{idAgendamento}/confirmacao")
 	@PreAuthorize("hasAnyAuthority('admin')")
-	public ResponseEntity<Agendamento> confirmarConsulta(@RequestParam("id") Long idAgendamento) {
+	public ResponseEntity<Agendamento> confirmarConsulta(@PathVariable Long idAgendamento) {
 		Agendamento agendamento = agendamentoService.confirmarAgendamento(idAgendamento, true);
 		return ResponseEntity.status(HttpStatus.OK).body(agendamento);
 	}
 	
-	@PostMapping("/cancelamento")
+	@PostMapping("/{idAgendamento}/cancelamento")
 	@PreAuthorize("hasAnyAuthority('admin')")
-	public ResponseEntity<Agendamento> cancelarConsulta(@RequestParam("id") Long idAgendamento) {
+	public ResponseEntity<Agendamento> cancelarConsulta(@PathVariable Long idAgendamento) {
 		Agendamento agendamento = agendamentoService.confirmarAgendamento(idAgendamento, false);
 		return ResponseEntity.status(HttpStatus.OK).body(agendamento);
 	}
