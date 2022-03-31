@@ -31,7 +31,7 @@ public class FuncionarioSpecification implements Specification<Funcionario> {
     	}
     	
     	if(filter != null && filter.getNome() != null) {
-    		predicates.add(builder.like(root.<String>get("nome"), "%" + filter.getNome() + "%"));
+    		predicates.add(builder.like(builder.lower(root.<String>get("nome")), "%" + filter.getNome().toLowerCase() + "%"));
     	}
     	
         return builder.and(predicates.toArray(new Predicate[predicates.size()]));

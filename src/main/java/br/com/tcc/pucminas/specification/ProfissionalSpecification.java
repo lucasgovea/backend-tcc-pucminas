@@ -31,7 +31,7 @@ public class ProfissionalSpecification implements Specification<Profissional> {
     	}
     	
     	if(filter != null && filter.getNome() != null) {
-    		predicates.add(builder.like(root.<String>get("nome"), "%" + filter.getNome() + "%"));
+    		predicates.add(builder.like(builder.lower(root.get("nome")), "%" + filter.getNome().toLowerCase() + "%"));
     	}
     	
         return builder.and(predicates.toArray(new Predicate[predicates.size()]));

@@ -30,7 +30,7 @@ public class PacienteSpecification implements Specification<Paciente> {
     	}
     	
     	if(filter != null && filter.getNome() != null) {
-    		predicates.add(builder.like(root.get("nome"), "%" + filter.getNome() + "%"));
+    		predicates.add(builder.like(builder.lower(root.get("nome")), "%" + filter.getNome().toLowerCase() + "%"));
     	}
     	
         return builder.and(predicates.toArray(new Predicate[predicates.size()]));

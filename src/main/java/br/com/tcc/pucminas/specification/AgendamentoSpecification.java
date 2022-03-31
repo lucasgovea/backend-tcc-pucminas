@@ -36,7 +36,7 @@ public class AgendamentoSpecification implements Specification<Agendamento> {
     	}
     	
     	if(filter != null && filter.getNome() != null) {
-    		predicates.add(builder.like(pacienteAgendamentoJoin.get("nome"), "%" + filter.getNome() + "%"));
+    		predicates.add(builder.like(builder.lower(pacienteAgendamentoJoin.get("nome")), "%" + filter.getNome().toLowerCase() + "%"));
     	}
     	
     	if(filter != null && filter.getProximas() != null && filter.getProximas().booleanValue()) {
