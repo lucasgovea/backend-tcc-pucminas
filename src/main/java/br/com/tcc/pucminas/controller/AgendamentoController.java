@@ -74,7 +74,7 @@ public class AgendamentoController {
 	
 	@PostMapping("enviar-email-confirmacao/{idAgendamento}")
 	@PreAuthorize("hasAnyAuthority('admin')")
-	public ResponseEntity<Agendamento> envirarEmailConfirmacao(@PathVariable Long idAgendamento) {
+	public ResponseEntity<Agendamento> enviarEmailConfirmacao(@PathVariable Long idAgendamento) {
 		agendamentoService.enviarEmailConfirmacao(idAgendamento);
 		return ResponseEntity.status(HttpStatus.OK).build();
 	}
