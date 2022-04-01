@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 @EnableRabbit
 public class RabbitMqConfig {
 
-	public final static String FILA_EMAIL_CONFIRMAR_AGENDAMENTO = "email-comfirmar-agendamento";
+	public final static String FILA_EMAIL_CONFIRMAR_AGENDAMENTO = "email-confirmar-agendamento";
 	
 	@Bean
 	public RabbitTemplate rabbitTemplate(ObjectMapper objectMapper, ConnectionFactory factory) {
