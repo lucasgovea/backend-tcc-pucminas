@@ -1,5 +1,8 @@
 package br.com.tcc.pucminas.model;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
@@ -14,5 +17,11 @@ public enum TipoProfissional {
 	
 	private Integer codigo;
 	private String descricao;
+	
+	public static Optional<TipoProfissional> valueOf(int value) {
+        return Arrays.stream(values())
+            .filter(v -> v.codigo == value)
+            .findFirst();
+    }
 	
 }

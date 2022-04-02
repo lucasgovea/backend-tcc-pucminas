@@ -60,8 +60,8 @@ public class ProfissionalController {
 	
 	@PutMapping("/{idProfissional}")
 	@PreAuthorize("hasAnyAuthority('admin')")
-	public ResponseEntity<Profissional> atualizar(@PathVariable Long idProfissional, @RequestBody @Valid Profissional profissional) {
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(profissionalService.atualizar(idProfissional, profissional));
+	public ResponseEntity<Profissional> atualizar(@PathVariable Long idProfissional, @RequestBody @Valid ProfissionalDTO dto) {
+		return ResponseEntity.status(HttpStatus.ACCEPTED).body(profissionalService.atualizar(idProfissional, dto));
 	}
 	
 	

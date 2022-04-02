@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import javax.persistence.EnumType;
 import javax.transaction.Transactional;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -73,11 +74,14 @@ public class ProfissionalService {
 	}
 
 	@Transactional
-	public Profissional atualizar(Long idProfissional, Profissional profissional) {
+	public Profissional atualizar(Long idProfissional, ProfissionalDTO dto) {
 		Profissional p = profissionalRepo.findById(idProfissional)
 				.orElseThrow(() -> new EntityNotFoundException("Profissional nao encontrada pelo id " + idProfissional));
-		profissional.setId(p.getId());
-		return profissionalRepo.save(profissional);
+		p.setCpf(dto.getCpf());
+		p.setNome(dto.getNome());
+		p.setAtuacao(TipoProfissional.valueOf(Integer.valueOf(dto.getTipoProfissional())).orElseThrow(() -> new EntityNotFoundException("Tipo de Profissional não encontrado")));
+		p.getUsuario().setLogin(dto.getCpf());
+		return p;
 	}
 
 	public List<Profissional> buscarFiltranto(ProfissionalFilterDTO dadosBusca) {
