@@ -18,7 +18,7 @@ spring:
     user: tcc-postgres
     url: jdbc:postgresql://db:5432/tcc-postgres
   mail:
-    username: youremail
+    username: ${YOUR_EMAIL}
     port: '587'
     properties:
       mail:
@@ -26,11 +26,14 @@ spring:
           starttls:
             enable: 'true'
           auth: 'true'
+          ssl:
+            trust: smtp.office365.com
+            protocols: TLSv1.2
     default-encoding: UTF-8
-    host: smtp.gmail.com
+    host: smtp.office365.com
     protocol: smtp
     test-connection: 'false'
-    password: yourpassword
+    password: ${YOUR_PASSWORD}
   datasource:
     driverClassName: org.postgresql.Driver
     password: tcc-postgres

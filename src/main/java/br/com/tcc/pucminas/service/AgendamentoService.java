@@ -10,6 +10,7 @@ import java.util.Optional;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,9 @@ import br.com.tcc.pucminas.specification.AgendamentoSpecification;
 
 @Service
 public class AgendamentoService {
+	
+	@Value("${spring.mail.username}")
+	private String emailFrom;
 	
 	private static final String TIME_ZONE = "America/Sao_Paulo";
 	
@@ -103,7 +107,7 @@ public class AgendamentoService {
 		props.put("datahoraAgendamento", agendamento.getMarcacaoAsString());
 		props.put("idAgendamento", agendamento.getId());
 		props.put("nomeEstabelecimento", "DentalClin");
-		DadosEmailConfirmacao dados = new DadosEmailConfirmacao("meusistema@meusistema.com", agendamento.getPaciente().getEmail(), "Confirmação Consulta", null, props);
+		DadosEmailConfirmacao dados = new DadosEmailConfirmacao(emailFrom, agendamento.getPaciente().getEmail(), "Confirmação Consulta", null, props);
 		return dados;
 	}
 		
