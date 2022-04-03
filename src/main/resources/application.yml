@@ -1,3 +1,5 @@
+app
+  domain-name-url: ${DOMAIN_NAME_URL:localhost:8080}
 spring:
   mvc:
       pathmatch:
@@ -47,6 +49,9 @@ spring:
     port: 5672
     username: guest
     password: guest
-# remover sql.init.mode=always quando nao quiser que execute o data.sql  sql:    init:      mode: never
+# remover sql.init.mode=always quando nao quiser que execute o data.sql
+  sql:
+    init:
+      mode: never
 hikari:
   max-lifetime: '50000'
