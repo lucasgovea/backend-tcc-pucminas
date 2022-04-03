@@ -29,6 +29,9 @@ public class AgendamentoService {
 	@Value("${spring.mail.username}")
 	private String emailFrom;
 	
+	@Value("${app.domain-name-url}")
+	private String domainNameUrl;
+	
 	private static final String TIME_ZONE = "America/Sao_Paulo";
 	
 	private final AgendamentoRepository agendamentoRepo;
@@ -107,6 +110,7 @@ public class AgendamentoService {
 		props.put("datahoraAgendamento", agendamento.getMarcacaoAsString());
 		props.put("idAgendamento", agendamento.getId());
 		props.put("nomeEstabelecimento", "DentalClin");
+		props.put("domainNameUrl", domainNameUrl);
 		DadosEmailConfirmacao dados = new DadosEmailConfirmacao(emailFrom, agendamento.getPaciente().getEmail(), "Confirmação Consulta", null, props);
 		return dados;
 	}
